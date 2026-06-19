@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Урок 3 - Домашнє завдання</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		li {
+			list-style: none;
+		}
+
+		img {
+			vertical-align: middle;
+			max-width: 100%;
+		}
+
+		html,
+		body {
+			height: 100%;
+		}
+
+		:root {
+			color-scheme: dark light;
+		}
+
+		body {
+			font-family: system-ui, sans-serif;
+			background-color: light-dark(#cacbd0, #0f1117);
+			color: light-dark(#0f1117, #e2e8f0);
+			padding: 2.5rem 1.25rem;
+		}
+
+		.wrapper {
+			display: flex;
+			flex-direction: column;
+			overflow: clip;
+			min-height: 100%;
+			max-width: 62.5rem;
+			margin-inline: auto;
+
+			&>*:not(:last-child) {
+				margin-bottom: 2rem;
+			}
+		}
+
+		.main-content {
+			flex-grow: 1;
+			display: grid;
+			row-gap: 1rem;
+		}
+
+		h1 {
+			font-size: 1.5rem;
+			text-transform: uppercase;
+			color: light-dark(#102f5e, #a78bfa);
+		}
+
+		.header,
+		.footer {
+			padding: 1rem 0;
+			text-align: center;
+			border-block: 0.0625rem solid light-dark(#2d2f3e, #cacbd0);
+		}
+
+		.task {
+			background-color: light-dark(#a9acbd, #1a1c2b);
+			border: 0.0625rem solid light-dark(#2d2f3e, #cacbd0);
+			padding: 1rem;
+			display: grid;
+			row-gap: 1rem;
+
+			h2 {
+				font-size: 1rem;
+				text-transform: uppercase;
+				color: light-dark(#212934, #94a3b8);
+			}
+
+			p {
+				font-size: 0.9rem;
+				color: light-dark(#243c3f, #9fc9ca);
+			}
+		}
+
+		.run-btn,
+		.button {
+			width: fit-content;
+			background-color: light-dark(#b09cf2, #1e1b4b);
+			color: light-dark(#0f1117, #b3becc);
+			padding: 0.8rem 1rem;
+			cursor: pointer;
+			border: 0.0625rem solid light-dark(#2d2f3e, #cacbd0);
+			transition: background-color 0.3s;
+
+			&:hover {
+				background-color: light-dark(#8d82b0, #102158);
+			}
+		}
+
+		#task2-output ul {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+
+			& li {
+				background-color: light-dark(#2d2f3e, #1a1c2b);
+				border: 0.0625rem solid light-dark(#3d4058, #cacbd0);
+				padding: 0.5rem 1rem;
+			}
+		}
+
+		.items-wrap {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
+
+			.item {
+				background-color: light-dark(#9eabf7, #1a1c2b);
+				border: 0.0625rem solid light-dark(#3d4058, #cacbd0);
+				padding: 0.5rem 1rem;
+				font-size: 0.9rem;
+				color: light-dark(#131a25, #cacbd0);
+				transition: background-color 0.3s;
+
+				&.active {
+					background-color: light-dark(#908f9a, #1e1b4b);
+				}
+			}
+		}
+
+		.text {
+			p {
+				font-size: 1.5rem;
+				line-height: 1.5;
+
+				&:not(:last-child) {
+					margin-bottom: 1rem;
+				}
+			}
+		}
+
+		.link {
+			color: light-dark(#011e42, #93c5fd);
+			text-decoration: underline;
+			text-underline-offset: 0.1875rem;
+			font-weight: 700;
+			cursor: pointer;
+			transition: color 0.3s;
+
+			&:hover {
+				color: light-dark(#0c4a6e, #60a5fa);
+			}
+		}
+
+		.badge {
+			display: inline-flex;
+			font-size: 0.75rem;
+			padding: 0.125rem 0.5rem;
+			border-radius: 100vw;
+
+			&:not(:last-child) {
+				margin-right: 0.5rem;
+			}
+
+			&.badge-ok {
+				background-color: #14532d;
+				color: #4ade80;
+			}
+
+			&.badge-err {
+				background: #450a0a;
+				color: #f87171;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<h1>Урок 3 - DOM</h1>
+		</header>
+		<main class="main-content">
+			<div class="task">
+				<h2>Задача №1</h2>
+				<p>Отримати елемент &lt;body&gt; в константу</p>
+				<button class="run-btn" onclick="runTask1()">Запустити</button>
+				<span id="t1-result"></span>
+			</div>
+			<div class="task">
+				<h2>Задача №2</h2>
+				<p class="task-label">Додати в &lt;body&gt; список UL з 5 елементами LI</p>
+				<button class="run-btn" onclick="runTask2()">Запустити</button>
+				<div id="task2-output"></div>
+			</div>
+			<div class="task">
+				<h2>Задача №3</h2>
+				<p class="task-label">Додати клас <code>loaded</code> до body → зробити текст зеленим</p>
+				<button class="run-btn" onclick="runTask3()">Запустити</button>
+				<span id="t3-result"></span>
+			</div>
+			<div class="task">
+				<h2>Задача №4</h2>
+				<p class="task-label">Трьом елементам .item додати клас active та змінити текст</p>
+				<ul class="items-wrap">
+					<li class="item">старий текст</li>
+					<li class="item">старий текст</li>
+					<li class="item">старий текст</li>
+				</ul>
+				<button class="run-btn" onclick="runTask4()">Запустити</button>
+			</div>
+			<div class="task">
+				<h2>Задача №5</h2>
+				<p class="task-label">Прокрутити скрол до кнопки .button</p>
+				<button class="run-btn" onclick="runTask5()">Запустити scroll</button>
+				<div class="text">
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo beatae eveniet hic. Labore quis laudantium, similique officia impedit esse, consequatur voluptate possimus dolor obcaecati repellat illo animi. Quos, aliquid ut.</p>
+				</div>
+				<button class="button">Я - кнопка .button</button>
+			</div>
+			<div class="task">
+				<h2>Задача №6</h2>
+				<p class="task-label">Посиланню .link додати data-value="100" і якщо значення < 200 - колір тексту червоний.</p>
+				<a class="link" href="#">Я - посилання .link</a>
+				<button class="run-btn" onclick="runTask6()">Запустити</button>
+				<span id="t6-result"></span>
+			</div>
+		</main>
+		<footer class="footer"> FLS © 2026 </footer>
+	</div>
+	<script type="module">
+		import { task1, task2, task3, task4, task5, task6 } from './solution/solution.js';
+
+		function badge(ok, text) {
+			return `<span class="badge ${ok ? 'badge-ok' : 'badge-err'}">${text}</span>`;
+		}
+
+		window.runTask1 = () => {
+			const result = task1();
+			const ok = result === document.body;
+			document.getElementById('t1-result').innerHTML = badge(ok, ok ? '✓ body отримано' : '✗ повернуто не body');
+		};
+
+		window.runTask2 = () => {
+			const out = document.getElementById('task2-output');
+			out.innerHTML = '';
+			
+			task2(5);
+
+			const container = document.querySelector('#task2-output');
+			const ul = container.querySelector('ul');
+			if (ul) out.appendChild(ul);
+			else out.innerHTML = '<span style="color:red">UL не знайдено! Перевірте чи додає функція елемент в document.body</span>';
+		};
+
+		window.runTask3 = () => {
+			task3();
+			const hasClass = document.body.classList.contains('loaded');
+			const isGreen = document.body.style.color === 'green';
+			const ok = hasClass && isGreen;
+			document.getElementById('t3-result').innerHTML =
+				badge(hasClass, hasClass ? '✓ клас loaded' : '✗ немає класу') +
+				badge(isGreen, isGreen ? '✓ колір green' : '✗ колір не green');
+		};
+
+		window.runTask4 = () => {
+			task4();
+		};
+
+		window.runTask5 = () => {
+			task5();
+		};
+
+		window.runTask6 = () => {
+			task6();
+			const link = document.querySelector('.link');
+			const hasAttr = link.dataset.value === '100';
+			const isRed = link.style.color === 'red';
+			document.getElementById('t6-result').innerHTML =
+				badge(hasAttr, hasAttr ? '✓ data-value=100' : '✗ немає атрибуту') +
+				badge(isRed, isRed ? '✓ колір red' : '✗ колір не red');
+		};
+	</script>
+</body>
+
+</html>
