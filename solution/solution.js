@@ -8,6 +8,13 @@
 function task1() {
 	// поверніть константу з body
 	// ваш код тут
+	const bodyElement = document.body;
+	if (bodyElement) {
+		return bodyElement;
+	}
+	else {
+		console.log(`Не знайдено`);
+	}
 	
 }
 
@@ -18,6 +25,17 @@ function task1() {
 
 function task2(count = 3) {
 	// ваш код тут
+	const task2 = document.querySelector('#task2-output');
+	const newElement = document.createElement ('ul');
+	for (let i = 0; i<count; i++) {
+		const newElementTwo = document.createElement ('li');
+		newElementTwo.textContent = `${i + 1}`
+		newElement.append(newElementTwo);
+	}
+	if (task2) {
+		task2.append(newElement);
+	console.log(task2)
+	}
 	
 }
 
@@ -28,7 +46,12 @@ function task2(count = 3) {
 
 function task3() {
 	// ваш код тут
-	
+	const bodyElement = document.body;
+	bodyElement.classList.add('loaded');
+	if (bodyElement.classList.contains ('loaded')) {
+		bodyElement.style.color = 'green'
+	}
+	console.log(bodyElement)
 }
 
 
@@ -38,7 +61,15 @@ function task3() {
 
 function task4(root = document) {
 	// ваш код тут
-	
+	const taskItems = root.querySelectorAll('.item');
+	if (taskItems.length) {
+		taskItems.forEach((taskItem, index) => {
+			console.log(taskItem.textContent);
+			taskItem.textContent = `Елемент №${index + 1}`;
+			taskItem.classList.add(`active`)
+		})
+		
+	}
 }
 
 
@@ -48,7 +79,15 @@ function task4(root = document) {
 
 function task5() {
 	// ваш код тут
-	
+	const buttonElement = document.querySelector(`.button`);
+	if (buttonElement) {
+		buttonElement.scrollIntoView({
+			behavior: `smooth`
+		})
+	}
+	else{
+		console.log(`Елемент з даним класом не знайдено`)
+	}
 }
 
 
@@ -59,8 +98,18 @@ function task5() {
 
 function task6() {
 	// ваш код тут
+	const linkElement = document.querySelector(`.link`);
+	if(linkElement) {
+		linkElement.dataset.value = `100`;
+	if (+linkElement.dataset.value  < 200) {
+		linkElement.style.color = `red`;
+	}
+
+	}
+
 	
-}
+}	
+
 
 
 // Не чіпати - потрібно і для тестів, і для браузера
